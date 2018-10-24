@@ -1,8 +1,8 @@
 <template>
   <div class="swiper-container">
     <swiper :options="swiperOption">
-      <swiper-slide v-for="str in swiperSlides" :key="str.index">
-        <div class="swiper-slide" :style="{ backgroundImage: 'url(' + str.gi_img + ')' }"></div>
+      <swiper-slide  v-for="str in swiperSlides" :key="str.index">
+        <div  class="swiper-slide" :style="{ backgroundImage: 'url(' + str + ')' }"></div>
       </swiper-slide>
     </swiper>
     <slot name="pagination"></slot>
@@ -26,11 +26,11 @@ export default {
         }
       },
       mounted () {
-        setInterval(() => {
-          if (this.swiperSlides.length < 10) {
-            this.swiperSlides.push(this.swiperSlides.length + 1)
-          }
-        }, 1000)
+        // setInterval(() => {
+        //   if (this.swiperSlides.length < 10) {
+        //     this.swiperSlides.push(this.swiperSlides.length + 1)
+        //   }
+        // }, 1000)
       }
     }
   },

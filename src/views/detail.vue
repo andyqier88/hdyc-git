@@ -15,23 +15,32 @@
     </div>
 </template>
 <script>
+/* eslint-disable */
 import commonSwiper from '@/components/commonSwiper.vue'
 // import location from '@/components/location.vue'
 import detailInfo from '@/components/detailInfo.vue'
 import service from '@/components/service.vue'
 import fixedBottom from '@/components/fixedBottom.vue'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
   name: 'detail',
   data () {
     return {
+      swiperOption: {
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'fraction'
+        }
+      },
       swiperSlides: [
-        { 'gi_img': 'https://img-blog.csdn.net/20180110222712301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGFuZGVyX3hpb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast' },
-        { 'gi_img': 'https://img-blog.csdn.net/20180110222712301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGFuZGVyX3hpb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast' },
-        { 'gi_img': 'https://img-blog.csdn.net/20180110222712301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGFuZGVyX3hpb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast' },
-        { 'gi_img': 'https://img-blog.csdn.net/20180110222712301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGFuZGVyX3hpb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast' },
-        { 'gi_img': 'https://img-blog.csdn.net/20180110222712301?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGFuZGVyX3hpb25n/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast' }
-      ]
+         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
+         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
+         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
+         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
+         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' 
+      ],
+      detailData: []
     }
   },
   components: {
@@ -39,6 +48,24 @@ export default {
     service,
     detailInfo,
     fixedBottom
+  },
+  methods: {
+    // 获取详情
+    getDetail () {
+      this.$axios
+        .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
+        .then(res => {
+          console.log(res)
+          this.detailData = res.data.data
+          this.swiperSlides = res.data.data.images
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  },
+  created () {
+    this.getDetail()
   }
 }
 </script>
