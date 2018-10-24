@@ -1,13 +1,22 @@
 <template>
     <div>
         <commonSwiper :swiperSlides = 'swiperSlides'>
-          <div class="swiper-pagination" style="color: rgb(255, 255, 255);text-align: center;right: 0;background: rgba(0,0,0,0.2);border-radius: 20px;width: 42px; padding: 2px 5px;" slot="pagination"></div>
+          <div class="swiper-pagination" style="" slot="pagination"></div>
         </commonSwiper>
+        <detail-info></detail-info>
+        <!-- <location></location> -->
+        <div>
+          <service>
+          </service>
+        </div>
+        <div>
+          <fixed-bottom></fixed-bottom>
+        </div>
     </div>
 </template>
 <script>
 import commonSwiper from '@/components/commonSwiper.vue'
-import location from '@/components/location.vue'
+// import location from '@/components/location.vue'
 import detailInfo from '@/components/detailInfo.vue'
 import service from '@/components/service.vue'
 import fixedBottom from '@/components/fixedBottom.vue'
@@ -28,7 +37,6 @@ export default {
   components: {
     commonSwiper,
     service,
-    location,
     detailInfo,
     fixedBottom
   }
@@ -39,6 +47,14 @@ export default {
 .swiper-pagination{
   right: 0 !important;
   left: auto;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  right: 0;
+  background: rgba(0,0,0,0.2);
+  border-radius: 20px;
+  width: 50px;
+  padding: 2px 5px;
+  font-size: 14px;
 }
 .swiper-pagination-bullet {
       width: 0.833rem;

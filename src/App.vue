@@ -4,6 +4,6 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
-
+<style lang="less">
+@import './../src/assets/css/reset.css';
 </style>
