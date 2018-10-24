@@ -71,6 +71,7 @@ export default {
   width: 23%;
   text-align: center;
   margin: 10px 0;
+  font-size: 14px;
   p {
       color: #a0a0a0;
     &:first-child {

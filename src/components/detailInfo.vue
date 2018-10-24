@@ -31,7 +31,7 @@
         </div>
         <split></split>
         <!-- 园区概况 -->
-        <div>
+        <div class="park-intro">
             <h3>园区概况</h3>
             <p>易代储，定位于满足中小微企业灵活仓储需求的互联网仓储运营管理平台，通过产品+服务模式，整合各类优质仓库资源，搭建全国区域最广、库房最多、服务最优的管理平台，为客户提供仓储一站式解决方案。以灵活时间、灵活空间的仓储租赁方式，标准化的库内操作管理，不断推动仓储行业各环节升级和创新，提升供应链管理价值。</p>
         </div>
@@ -111,5 +111,9 @@ h3{
         border-bottom:1px solid #eee;
         padding-bottom: 10px;
         margin: 10px 0;
+    }
+    .park-intro p{
+        text-indent: 2em;
+        padding-right: 20px;
     }
 </style>

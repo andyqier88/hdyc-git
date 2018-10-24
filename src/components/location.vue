@@ -22,7 +22,7 @@ export default {
   data () {
     return {
       locaTab: [' 高速 ', ' 机场 ', ' 商圈 '],
-      location: '河南省新乡市城乡一体化示范区恒大御景湾',
+      location: '河南省郑州市高新技术开发区总部企业基地3号楼',
       num: 0,
     }
   },
