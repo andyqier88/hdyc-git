@@ -3,13 +3,13 @@
         <commonSwiper :swiperSlides = 'swiperSlides'>
           <div class="swiper-pagination" style="" slot="pagination"></div>
         </commonSwiper>
-        <detail-info></detail-info>
+        <detail-info :detailData = 'detailData'></detail-info>
         <!-- <location></location> -->
         <div>
-          <service>
-          </service>
+          <!-- <service>
+          </service> -->
         </div>
-        <div>
+        <div v-if="isWebShare">
           <fixed-bottom></fixed-bottom>
         </div>
     </div>
@@ -22,7 +22,7 @@ import detailInfo from '@/components/detailInfo.vue'
 import service from '@/components/service.vue'
 import fixedBottom from '@/components/fixedBottom.vue'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-
+import { Indicator } from 'mint-ui';
 export default {
   name: 'detail',
   data () {
@@ -33,14 +33,9 @@ export default {
           type: 'fraction'
         }
       },
-      swiperSlides: [
-         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
-         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
-         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
-         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' ,
-         'https://hdyc-pic-dev.oss-cn-hangzhou.aliyuncs.com/app/common/img/cangku.jpg' 
-      ],
-      detailData: []
+      swiperSlides: [],
+      detailData: [],
+      isWebShare: ''
     }
   },
   components: {
@@ -50,14 +45,23 @@ export default {
     fixedBottom
   },
   methods: {
+    // init
+    init () {
+      this.isWebShare = this.$route.query.share
+    },
     // 获取详情
     getDetail () {
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      });
       this.$axios
         .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
         .then(res => {
           console.log(res)
           this.detailData = res.data.data
           this.swiperSlides = res.data.data.images
+          Indicator.close()
         })
         .catch(error => {
           console.log(error)
@@ -65,12 +69,13 @@ export default {
     }
   },
   created () {
-    this.getDetail()
+    this.getDetail();
+    this.init();
   }
 }
 </script>
 <style lang="less">
-@import '/swiper/dist/css/swiper.css';
+// @import '/swiper/dist/css/swiper.css';
 .swiper-pagination{
   right: 0 !important;
   left: auto;

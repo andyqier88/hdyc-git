@@ -42,10 +42,10 @@ export default {
 </script>
 
 <style lang="less">
-@import '/swiper/dist/css/swiper.css';
+// @import '/swiper/dist/css/swiper.css';
 .swiper-container {
     width: 100%;
-    height: 10rem;
+    // height: 13rem;
     .swiper-wrapper {
       width: 100%;
       height: 100%;
@@ -54,7 +54,7 @@ export default {
       background-position: center;
       background-size: cover;
       width: 100%;
-      height: 200px;
+      height: 212px;
       img {
         width: 100%;
         height: 100%;

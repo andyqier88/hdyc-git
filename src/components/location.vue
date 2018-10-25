@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="location-wrapper">
         <h3>地理位置</h3>
         <!-- 地理位置 -->
-        <p>{{location}}</p>
+        <p>{{detailData.address}}</p>
         <div id="allmap"></div>
-        <div class="loc-tabs">
+        <!-- <div class="loc-tabs">
             <ul>
                 <li v-for="(item,index) in locaTab" :key="item.index" @click="tabChange(index)">
                     <span :class="num == index ? 'active': ''">{{item}}</span>
@@ -13,7 +13,7 @@
         </div>
         <div class="park-map-result">
             <p>附近没有该类交通信息</p>
-        </div>
+        </div> -->
     </div>
 </template>
 <script>
@@ -29,6 +29,9 @@ export default {
   mounted() {
     this.getMap()
   },
+  props: {
+    detailData: ''
+  },
   methods: {
     //   获取地图
     getMap() {
@@ -39,15 +42,14 @@ export default {
       // 创建地址解析器实例
       var myGeo = new BMap.Geocoder()
       // 将地址解析结果显示在地图上,并调整地图视野
-      myGeo.getPoint(this.location,function(point) {
+      myGeo.getPoint(this.detailData.address,function(point) {
           if (point) {
             map.centerAndZoom(point, 16)
             map.addOverlay(new BMap.Marker(point))
           } else {
-            alert('您选择地址没有解析到结果!')
+            console.log('您选择地址没有解析到结果!')
           }
-        },
-        '北京市'
+        }
       )
     },
     // tab切换
@@ -58,6 +60,9 @@ export default {
 }
 </script>
 <style lang='less'>
+.location-wrapper {
+    margin-bottom: 50px;
+}
 #allmap {
     height: 226px;
     overflow: hidden;

@@ -1,54 +1,82 @@
 <template>
     <div class="detail-info-wrapper">
         <div >
-            <h2>易代储北京2号院</h2>
-            <p class="light-color">未来3个月，预计腾空面积14094m</p>
+            <h2>{{detailData.name}}</h2>
+            <!-- <p class="light-color">未来3个月，预计腾空面积14094m</p> -->
             <div class="price-inrto">
                     <div class="item-intro">
                         <p class="dack-color">价格</p>
-                        <p class="light-color">1.1元/m²/天起</p>
+                        <p class="light-color">{{detailData.rent}}元/m²/天起</p>
                     </div>
                     <div class="item-intro">
                         <p class="dack-color">起租面积</p>
-                        <p class="light-color">100/m²</p>
+                        <p class="light-color">{{detailData.minimum_rental_area}}/m²</p>
                     </div>
                     <div class="item-intro">
                         <p class="dack-color">可租面积</p>
-                        <p class="light-color">100/m²</p>
+                        <p class="light-color">{{detailData.area}}/m²</p>
                     </div>
             </div>
         </div>
         <!--  -->
-        <div>
+        <div class="list-flex-top">
             <ul>
-                <li><span class="dack-color">区域：</span>北京市 - 朝阳区</li>
-                <li><span class="dack-color">编号：</span>北京市 - 朝阳区</li>
-                <li><span class="dack-color">地坪：</span>北京市 - 朝阳区</li>
-                <li><span class="dack-color">高度：</span>北京市 - 朝阳区</li>
-                <li><span class="dack-color">类型：</span>北京市 - 朝阳区</li>
-                <li><span class="dack-color">模式：</span>北京市 - 朝阳区</li>
+                <li><span class="dack-color">模式：</span>{{detailData.mode_name}}</li>
+                <li><span class="dack-color">位置：</span>{{detailData.area_name}}</li>
+                <li><span class="dack-color">编号：</span>{{detailData.area_code}}</li>
+                <li><span class="dack-color">地坪：</span>{{detailData.surface_name}}</li>
+                <li><span class="dack-color">类型：</span>{{detailData.type_name}}</li>
             </ul>
         </div>
         <split></split>
         <!-- 园区概况 -->
         <div class="park-intro">
             <h3>园区概况</h3>
-            <p>易代储，定位于满足中小微企业灵活仓储需求的互联网仓储运营管理平台，通过产品+服务模式，整合各类优质仓库资源，搭建全国区域最广、库房最多、服务最优的管理平台，为客户提供仓储一站式解决方案。以灵活时间、灵活空间的仓储租赁方式，标准化的库内操作管理，不断推动仓储行业各环节升级和创新，提升供应链管理价值。</p>
+            <p>{{detailData.summary}}</p>
         </div>
         <split></split>
         <!-- 园区信息 -->
-        <div>
+        <!-- <div  class="list-flex">
             <h3>园区信息</h3>
             <ul>
-                <li><span class="dack-color">建筑面积：</span>1985m²</li>
+                <li><span class="dack-color">建筑面积：</span>{{detailData.area}}m²</li>
                 <li><span class="dack-color">仓储面积：</span>177m²</li>
-                <li><span class="dack-color">园区资质：</span>--</li>
-                <li><span class="dack-color">仓储个数：</span>3个</li>
+                <li><span class="dack-color">园区资质：</span></li>
+                <li><span class="dack-color">仓储个数：</span>{{detailData.number_of_warehouses}}个</li>
+            </ul>
+        </div>
+        <split></split> -->
+        <!-- 基本信息 -->
+        <div class="list-flex">
+            <h3>基本信息</h3>
+            <h4>参数</h4>
+            <ul>
+                <li><span class="dack-color">仓储个数：</span>{{detailData.number_of_warehouses}}个</li>
+                <li><span class="dack-color">二层以上承重(吨/m²)：</span>{{detailData.bearing_above_two_stories}}</li>
+                <li><span class="dack-color">底层承重(吨/m²)：</span>{{detailData.bottom_bearing}}</li>
+                <li><span class="dack-color">卸货平台：</span>{{detailData.landing_platform_name}}</li>
+                <li><span class="dack-color">主干道宽度：</span>{{detailData.main_road_width}}</li>
+                <li><span class="dack-color">建筑高度：</span>{{detailData.height}}</li>
+                <li><span class="dack-color">建筑结构：</span>{{detailData.building_structure_name}}</li>
+                <li><span class="dack-color">园区资质：</span>{{detailData.credentials_name}}</li>
+            </ul>
+            <h4>设施</h4>
+            <ul>
+                <li><span class="dack-color">是否通水：</span>{{detailData.facility_through_water ? '是' : '否'}}</li>
+                <li><span class="dack-color">是否配电：</span>{{detailData.facility_through_water ? '是' : '否'}}</li>
+                <li><span class="dack-color">是否有雨棚：</span>{{detailData.facility_canopy ? '是' : '否'}}</li>
+                <li><span class="dack-color">其他：</span>{{detailData.facility_else ? detailData.facility_else :'无'}}</li>
+            </ul>
+            <h4>安防</h4>
+            <ul>
+                <li><span class="dack-color">安保系统：</span> <span v-for="item in detailData.security_system_name" :key="item.index">{{item}}</span></li>
+                <li><span class="dack-color">消防系统：</span>消防联动系统( <span v-for="item in detailData.ffl_eqp_name" :key="item.index">{{item}}</span>等)</li>
+                <li><span class="dack-color">消防级别：</span>{{detailData.fire_fighting_level_name}}</li>
             </ul>
         </div>
         <split></split>
         <!-- 地图 -->
-        <location></location>
+        <location :detailData='detailData'></location>
         <!-- 服务列表 -->
     </div>
 </template>
@@ -58,6 +86,9 @@ import location from '@/components/location.vue'
 export default {
   data () {
     return {}
+  },
+  props: {
+    detailData: ''
   },
   components: {
     split,
@@ -106,14 +137,45 @@ export default {
         padding-bottom: 10px;
         margin: 10px 0;
     }
+    h4{
+        padding: 10px 0;
+    }
 }
-h3{
+    .list-flex ul{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        &:first-child{
+            border: none;
+        }
+        li{
+            width: 50%;
+            line-height: 2;
+        }
+        &:last-child{
+            border: none;
+            li{
+                width: 100%;
+            }
+        }
+    }
+    .list-flex-top ul{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        li{
+            width: 48%;
+            line-height: 2;
+        }
+    }
+    h3{
         border-bottom:1px solid #eee;
         padding-bottom: 10px;
         margin: 10px 0;
     }
     .park-intro p{
-        text-indent: 2em;
         padding-right: 20px;
     }
 </style>

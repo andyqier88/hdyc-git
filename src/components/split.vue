@@ -4,10 +4,10 @@
 <style>
 .split{
     height: 10px;
-    background: #fbfbfb;
+    background: #efefef;
     margin-left: -20px;
     margin-top:10px;
-    border-bottom: 1px solid #efefef;
-    border-top: 1px solid #efefef;
+    /* border-bottom: 1px solid #efefef;
+    border-top: 1px solid #efefef; */
 }
 </style>
