@@ -7,6 +7,11 @@ import 'swiper/dist/css/swiper.css'
 import { Toast, Indicator } from 'mint-ui'
 import 'mint-ui/lib/style.css'
 
+// 路由钩子
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title
+  next()
+})
 // Vue.use(Mint)
 Vue.config.productionTip = false
 Vue.prototype.$Toast = Toast
