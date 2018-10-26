@@ -9,10 +9,16 @@ export default new Router({
     {
       path: '/',
       name: 'detail',
+      meta: {
+        title: ''
+      },
       component: () => import('./views/detail.vue')
     },
     {
       path: '/about',
+      meta: {
+        title: '恒道云仓用户注册协议'
+      },
       name: 'about',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

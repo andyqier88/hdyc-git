@@ -47,16 +47,16 @@ export default {
     init () {
       this.isWebShare = this.$route.query.share
       document.title = this.detailData.name
-				console.log(this.detailData.name)
+      console.log(this.detailData.name)
 				const content_json = {
 					"title": this.detailData.name ? this.detailData.name: '详情',
-					"content": this.detailData.name ? this.detailData.name: '懂生活，有艺术',
+					"content": this.detailData.name ? this.detailData.name: '',
 					"image": this.detailData.ss_share_img ,
 					"url": 'https://app.16988.cn/html/apph5/exhiBition.html#/index?id='+this.$route.query.id
 				};
-				if (typeof (HandPlay) != "undefined") { //在掌玩中
-					HandPlay.setShareInfo(JSON.stringify(content_json));
-					this.uid = HandPlay.getUserId();
+				if (typeof (HengdaoCloud) != "undefined") { //在掌玩中
+					HengdaoCloud.setShareInfo(JSON.stringify(content_json));
+					this.uid = HengdaoCloud.getUserId();
 				}
     },
     // 获取详情
@@ -65,6 +65,7 @@ export default {
         text: '加载中...',
         spinnerType: 'fading-circle'
       });
+      
       this.$axios
         .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
         .then(res => {
@@ -75,20 +76,38 @@ export default {
           }else{
             this.$Toast(res.data.message)
           }
-          
           this.$Indicator.close()
+          
         })
         .catch(error => {
           console.log(error)
         })
+    },
+    // 客服
+    qiaoFu(){
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?00798509c3c9e02c6c40ce30d0f03e71";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
     }
   },
   created () {
+    this.qiaoFu();
     this.getDetail();
-    this.init();
+    
+  },
+  mounted (){
+    setTimeout(()=>{
+      this.init();
+    },1200)
+    
   }
 }
 </script>
+
 <style lang="less">
 // @import '/swiper/dist/css/swiper.css';
 .swiper-pagination{
