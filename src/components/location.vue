@@ -2,7 +2,7 @@
     <div class="location-wrapper">
         <h3>地理位置</h3>
         <!-- 地理位置 -->
-        <p>{{detailData.address}}</p>
+        <p>{{detailData.province_name}}{{detailData.city_name}}{{detailData.area_name}}{{detailData.address}}</p>
         <div id="allmap"></div>
         <!-- <div class="loc-tabs">
             <ul>
@@ -22,17 +22,22 @@ export default {
   data () {
     return {
       locaTab: [' 高速 ', ' 机场 ', ' 商圈 '],
-      location: '河南省郑州市高新技术开发区总部企业基地3号楼',
+      location: '',
       num: 0,
     }
   },
   mounted() {
+    this.init()
     this.getMap()
   },
   props: {
     detailData: ''
   },
   methods: {
+    //   init
+    init(){
+        this.location = this.detailData.province_name+this.detailData.city_name+this.detailData.area_name+this.detailData.address
+    },
     //   获取地图
     getMap() {
       // 百度地图API功能
@@ -42,7 +47,7 @@ export default {
       // 创建地址解析器实例
       var myGeo = new BMap.Geocoder()
       // 将地址解析结果显示在地图上,并调整地图视野
-      myGeo.getPoint(this.detailData.address,function(point) {
+      myGeo.getPoint(this.location,function(point) {
           if (point) {
             map.centerAndZoom(point, 16)
             map.addOverlay(new BMap.Marker(point))
@@ -67,6 +72,7 @@ export default {
     height: 226px;
     overflow: hidden;
     margin-left:-20px;
+    margin-top: 10px;
     }
 .loc-tabs{
     margin-left: -20px;

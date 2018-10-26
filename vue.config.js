@@ -50,14 +50,14 @@
 //   lintOnSave: process.env.NODE_ENV !== 'production'
 // }
 module.exports = {
-  baseUrl: process.env.NODE_ENV === "production" ? "./" : "/",
+  baseUrl: process.env.NODE_ENV === 'production' ? './' : '/',
   devServer: {
     proxy: {
-      "/v1/": {
-        target: "http://api.hdyc.suanlaotou.com",
+      '/v1/': {
+        target: 'http://api.hdyc.suanlaotou.com',
         ws: true,
         changeOrigin: true
       }
     }
   }
-};
+}

@@ -17,12 +17,10 @@
 <script>
 /* eslint-disable */
 import commonSwiper from '@/components/commonSwiper.vue'
-// import location from '@/components/location.vue'
 import detailInfo from '@/components/detailInfo.vue'
 import service from '@/components/service.vue'
 import fixedBottom from '@/components/fixedBottom.vue'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import { Indicator } from 'mint-ui';
 export default {
   name: 'detail',
   data () {
@@ -48,10 +46,22 @@ export default {
     // init
     init () {
       this.isWebShare = this.$route.query.share
+      document.title = this.detailData.name
+				console.log(this.detailData.name)
+				const content_json = {
+					"title": this.detailData.name ? this.detailData.name: '详情',
+					"content": this.detailData.name ? this.detailData.name: '懂生活，有艺术',
+					"image": this.detailData.ss_share_img ,
+					"url": 'https://app.16988.cn/html/apph5/exhiBition.html#/index?id='+this.$route.query.id
+				};
+				if (typeof (HandPlay) != "undefined") { //在掌玩中
+					HandPlay.setShareInfo(JSON.stringify(content_json));
+					this.uid = HandPlay.getUserId();
+				}
     },
     // 获取详情
     getDetail () {
-      Indicator.open({
+      this.$Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
       });
@@ -59,9 +69,14 @@ export default {
         .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
         .then(res => {
           console.log(res)
-          this.detailData = res.data.data
-          this.swiperSlides = res.data.data.images
-          Indicator.close()
+          if(res.data.code == 200){
+            this.detailData = res.data.data
+            this.swiperSlides = res.data.data.images
+          }else{
+            this.$Toast(res.data.message)
+          }
+          
+          this.$Indicator.close()
         })
         .catch(error => {
           console.log(error)
