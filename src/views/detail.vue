@@ -50,9 +50,9 @@ export default {
       console.log(this.detailData.name)
 				const content_json = {
 					"title": this.detailData.name ? this.detailData.name: '详情',
-					"content": this.detailData.name ? this.detailData.name: '',
-					"image": this.detailData.ss_share_img ,
-					"url": 'https://app.16988.cn/html/apph5/exhiBition.html#/index?id='+this.$route.query.id
+					"content": '恒道云仓-您身边的仓储专家',
+					"image": 'https://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201810/26/16180384757.png',
+					"url": 'https://api.hdyc.suanlaotou.com/html/cangDetail/index.html#/?id='+this.$route.query.id+'&share=option'
 				};
 				if (typeof (HengdaoCloud) != "undefined") { //在掌玩中
 					HengdaoCloud.setShareInfo(JSON.stringify(content_json));
@@ -84,18 +84,18 @@ export default {
         })
     },
     // 客服
-    qiaoFu(){
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?00798509c3c9e02c6c40ce30d0f03e71";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-      })();
-    }
+    // qiaoFu(){
+    //   var _hmt = _hmt || [];
+    //   var hm = document.createElement("script");
+    //   hm.src = "https://hm.baidu.com/hm.js?3fc28ef7489fd9309898ad3fad5c4f75";
+    //   var s = document.getElementsByTagName("script")[0]; 
+    //   s.parentNode.insertBefore(hm, s);
+    //   console.log('百度桥商')
+    //   console.log(hm)
+    // }
   },
   created () {
-    this.qiaoFu();
+    // this.qiaoFu();
     this.getDetail();
     
   },
