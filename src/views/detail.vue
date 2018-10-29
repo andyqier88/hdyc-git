@@ -46,7 +46,6 @@ export default {
     init () {
       this.isWebShare = this.$route.query.share
       document.title = this.detailData.name
-      console.log(this.detailData.name)
       const contentJson = {
         'title': this.detailData.name ? this.detailData.name : '详情',
         'content': '恒道云仓-您身边的仓储专家',
@@ -70,7 +69,6 @@ export default {
       this.$axios
         .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
         .then(res => {
-          console.log(res)
           if (res.data.code === 200) {
             this.detailData = res.data.data
             this.swiperSlides = res.data.data.images
