@@ -54,7 +54,7 @@ export default {
 					"image": 'https://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201810/26/16180384757.png',
 					"url": 'https://api.hdyc.suanlaotou.com/html/cangDetail/index.html#/?id='+this.$route.query.id+'&share=option'
 				};
-				if (typeof (HengdaoCloud) != "undefined") { //在掌玩中
+				if (typeof (HengdaoCloud) != "undefined") { //在恒道云仓中
 					HengdaoCloud.setShareInfo(JSON.stringify(content_json));
 					this.uid = HengdaoCloud.getUserId();
 				}

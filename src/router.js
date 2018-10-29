@@ -32,6 +32,14 @@ export default new Router({
         title: '关于我们'
       },
       component: () => import('./views/intro.vue')
+    },
+    {
+      path: '/demandDetail',
+      name: 'demandDetail',
+      meta: {
+        title: '需求详情'
+      },
+      component: () => import('./views/demandDetail.vue')
     }
   ]
 })
