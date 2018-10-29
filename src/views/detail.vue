@@ -15,12 +15,11 @@
     </div>
 </template>
 <script>
-/* eslint-disable */
+
 import commonSwiper from '@/components/commonSwiper.vue'
 import detailInfo from '@/components/detailInfo.vue'
 import service from '@/components/service.vue'
 import fixedBottom from '@/components/fixedBottom.vue'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   name: 'detail',
   data () {
@@ -48,47 +47,48 @@ export default {
       this.isWebShare = this.$route.query.share
       document.title = this.detailData.name
       console.log(this.detailData.name)
-				const content_json = {
-					"title": this.detailData.name ? this.detailData.name: '详情',
-					"content": '恒道云仓-您身边的仓储专家',
-					"image": 'https://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201810/26/16180384757.png',
-					"url": 'https://api.hdyc.suanlaotou.com/html/cangDetail/index.html#/?id='+this.$route.query.id+'&share=option'
-				};
-				if (typeof (HengdaoCloud) != "undefined") { //在恒道云仓中
-					HengdaoCloud.setShareInfo(JSON.stringify(content_json));
-					this.uid = HengdaoCloud.getUserId();
-				}
+      const contentJson = {
+        'title': this.detailData.name ? this.detailData.name : '详情',
+        'content': '恒道云仓-您身边的仓储专家',
+        'image': 'https://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201810/26/16180384757.png',
+        'url': 'https://api.hdyc.suanlaotou.com/html/cangDetail/index.html#/?id=' + this.$route.query.id + '&share=option'
+      }
+      // eslint-disable-next-line
+      if (typeof (HengdaoCloud) !== 'undefined') { // 在恒道云仓中
+        // eslint-disable-next-line
+        HengdaoCloud.setShareInfo(JSON.stringify(contentJson))
+        // eslint-disable-next-line
+        this.uid = HengdaoCloud.getUserId()// eslint-disable-next-line
+      }
     },
     // 获取详情
     getDetail () {
       this.$Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
-      });
-      
+      })
       this.$axios
         .get(`/v1/warehouse/read?id=${this.$route.query.id}`)
         .then(res => {
           console.log(res)
-          if(res.data.code == 200){
+          if (res.data.code === 200) {
             this.detailData = res.data.data
             this.swiperSlides = res.data.data.images
-          }else{
+          } else {
             this.$Toast(res.data.message)
           }
           this.$Indicator.close()
-          
         })
         .catch(error => {
           console.log(error)
         })
-    },
+    }
     // 客服
     // qiaoFu(){
     //   var _hmt = _hmt || [];
     //   var hm = document.createElement("script");
     //   hm.src = "https://hm.baidu.com/hm.js?3fc28ef7489fd9309898ad3fad5c4f75";
-    //   var s = document.getElementsByTagName("script")[0]; 
+    //   var s = document.getElementsByTagName("script")[0];
     //   s.parentNode.insertBefore(hm, s);
     //   console.log('百度桥商')
     //   console.log(hm)
@@ -96,14 +96,12 @@ export default {
   },
   created () {
     // this.qiaoFu();
-    this.getDetail();
-    
+    this.getDetail()
   },
-  mounted (){
-    setTimeout(()=>{
-      this.init();
-    },1200)
-    
+  mounted () {
+    setTimeout(() => {
+      this.init()
+    }, 1200)
   }
 }
 </script>
