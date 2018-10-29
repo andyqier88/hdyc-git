@@ -65,7 +65,12 @@
                 <li><span class="dack-color">是否通水：</span>{{detailData.facility_through_water ? '是' : '否'}}</li>
                 <li><span class="dack-color">是否配电：</span>{{detailData.facility_through_water ? '是' : '否'}}</li>
                 <li><span class="dack-color">是否有雨棚：</span>{{detailData.facility_canopy ? '是' : '否'}}</li>
-                <li><span class="dack-color">其他：</span>{{detailData.facility_else ? detailData.facility_else :'无'}}</li>
+                <li><span class="dack-color">其他：</span>
+                    <span v-if="detailData.facility_else_name.length">
+                        <span  v-for="item in detailData.facility_else_name" :key="item.index">{{item}}</span>
+                    </span>
+                    <span v-else>无</span>
+                </li>
             </ul>
             <h4>安防</h4>
             <ul>
