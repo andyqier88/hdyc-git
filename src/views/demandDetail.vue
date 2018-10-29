@@ -3,8 +3,8 @@
         <!--  -->
         <div class="list-flex-de">
             <ul>
-                <li><span class="dack-color">需求编号：</span>{{detailData.id}}</li>
-                <li><span class="dack-color">截止日期：</span>{{detailData.expiration_date.substring(0,10)}}</li>
+                <li v-if="detailData.id"><span class="dack-color">需求编号：</span>{{detailData.id}}</li>
+                <li><span class="dack-color">截止日期：</span>{{subStr(detailData.expiration_date,0,10)}}</li>
                 <li><span class="dack-color">位置：</span>{{detailData.province_name}}{{detailData.city_name}}{{detailData.area_name}}</li>
                 <li style="text-align: right;padding-right: 20px;color: green;"><span >{{detailData.demand_status_name}}</span></li>
             </ul>
@@ -33,10 +33,9 @@
 /* eslint-disable */
 export default {
   data() {
-    return {};
-  },
-  props: {
-    detailData: ""
+    return {
+        detailData:[]
+    };
   },
   methods: {
     // 获取详情
@@ -60,9 +59,13 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    // 字符串截取
+    subStr (a,str,end) {
+        return String(a).substring(str,end)
+    },
   },
-  created () {
+  mounted () {
     this.getDetail();
   },
 };
