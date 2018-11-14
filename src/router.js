@@ -10,7 +10,7 @@ export default new Router({
       path: '/',
       name: 'detail',
       meta: {
-        title: ''
+        title: '仓库详情'
       },
       component: () => import('./views/detail.vue')
     },
@@ -41,5 +41,13 @@ export default new Router({
       },
       component: () => import('./views/demandDetail.vue')
     }
+    // {
+    //   path: '/cartIndex',
+    //   name: 'cartIndex',
+    //   meta: {
+    //     title: '购物车'
+    //   },
+    //   component: () => import('./views/cartIndex.vue')
+    // }
   ]
 })

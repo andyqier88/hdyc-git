@@ -6,6 +6,7 @@ import 'swiper/dist/css/swiper.css'
 // import Mint from 'mint-ui'
 import { Toast, Indicator } from 'mint-ui'
 import 'mint-ui/lib/style.css'
+// import store from './store'
 
 // 路由钩子
 router.beforeEach((to, from, next) => {
@@ -17,6 +18,7 @@ Vue.config.productionTip = false
 Vue.prototype.$Toast = Toast
 Vue.prototype.$Indicator = Indicator
 Vue.prototype.$axios = axios
+
 new Vue({
   router,
   render: h => h(App)

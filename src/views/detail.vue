@@ -48,7 +48,7 @@ export default {
       document.title = this.detailData.name
       const contentJson = {
         'title': this.detailData.name ? this.detailData.name : '详情',
-        'content': '恒道云仓-您身边的仓储专家',
+        'content': '恒道云仓，专注于仓储互联网化的网络平台，仓库资源多，种类全，覆盖全国。找仓库，就到恒道云仓',
         'image': 'https://zhangwan-picture-stage.oss-cn-hangzhou.aliyuncs.com/aliyun_oss/activity_images/201810/26/16180384757.png',
         'url': 'https://api.hdyc.suanlaotou.com/html/cangDetail/index.html#/?id=' + this.$route.query.id + '&share=option'
       }

@@ -1,16 +1,16 @@
 <template>
-    <div class="detail-info-wrapper">
+    <div v-if="detailData" class="detail-info-wrapper">
         <!--  -->
         <div class="list-flex-de">
             <ul>
                 <li v-if="detailData.id"><span class="dack-color">需求编号：</span>{{detailData.id}}</li>
-                <li><span class="dack-color">截止日期：</span>{{subStr(detailData.expiration_date,0,10)}}</li>
-                <li><span class="dack-color">位置：</span>{{detailData.province_name}}{{detailData.city_name}}{{detailData.area_name}}</li>
-                <li style="text-align: right;padding-right: 20px;color: green;"><span >{{detailData.demand_status_name}}</span></li>
+                <li v-if="detailData.expiration_date"><span class="dack-color">截止日期：</span>{{subStr(detailData.expiration_date,0,10)}}</li>
+                <li v-if="detailData.province_name"><span class="dack-color">位置：</span>{{detailData.province_name}}{{detailData.city_name}}{{detailData.area_name}}</li>
+                <li v-if="detailData.demand_status_name" style="text-align: right;padding-right: 20px;color: green;"><span >{{detailData.demand_status_name}}</span></li>
             </ul>
         </div>
-        <div class="list-flex-de">
-            <ul class="list-flex-ul">
+        <div class="list-flex-de" v-if="detailData.type_name">
+            <ul class="list-flex-ul" >
                 <li><span class="dack-color">类型：</span>{{detailData.type_name}}</li>
                 <li><span class="dack-color">模式：</span>{{detailData.mode_name}}</li>
                 <li><span class="dack-color">库高：</span>{{detailData.height_name}}</li>
@@ -18,12 +18,12 @@
                 <li><span class="dack-color">租赁周期：</span>{{detailData.leasehold_cycle_name}}</li>
                 <li><span class="dack-color">需求面积：</span>{{detailData.demand_area}}</li>
             </ul>
-            <p class="lihe"><span class="dack-color">存放物品：</span><span v-for="item in detailData.storage_of_articles_name" :key="item.index">{{item}}</span></p>
+            <p class="lihe"><span class="dack-color">存放物品：</span><span v-for="item in detailData.storage_of_articles_name" :key="item.index">{{item }} </span></p>
             <p class="lihe"><span class="dack-color">存放详情：</span>{{detailData.details_of_storage}}</p>
             <p class="lihe"><span class="dack-color">消防设备：</span>{{detailData.ff_eqp_name}}</p>
         </div>
         <!-- 其他要求 -->
-        <div class="park-intro">
+        <div class="park-intro" v-if="detailData.other_needs">
             <p class="dack-color">其他要求:</p>
             <p style="padding-top:10px;">{{detailData.other_needs}}</p>
         </div>
@@ -58,6 +58,7 @@ export default {
         })
         .catch(error => {
           console.log(error);
+          this.$Indicator.close();
         });
     },
     // 字符串截取
@@ -65,7 +66,7 @@ export default {
         return String(a).substring(str,end)
     },
   },
-  mounted () {
+  created () {
     this.getDetail();
   },
 };
